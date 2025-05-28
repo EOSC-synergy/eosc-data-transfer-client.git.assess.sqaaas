@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.cern.ch/batistal/eosc-data-transfer-client:
+      branch: main
+      repo: https://gitlab.cern.ch/batistal/eosc-data-transfer-client.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.cern.ch/batistal/eosc-data-transfer-client git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-sepia-uguisu.sh
+        container: qc.acc_stuffy-lilac-newfoundland
+  QC.Doc:
+    repos:
+      gitlab.cern.ch/batistal/eosc-data-transfer-client find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gloppy-auburn-ferret.sh
+        container: qc.doc_gimpy-azure-mist
+      gitlab.cern.ch/batistal/eosc-data-transfer-client git:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-silver-buffalo.sh
+        container: qc.doc_leaky-ecru-monster
+      gitlab.cern.ch/batistal/eosc-data-transfer-client markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.randy-xanthic-salamander.sh
+        container: qc.doc_clammy-chocolate-mongrel
+  QC.Lic:
+    repos:
+      gitlab.cern.ch/batistal/eosc-data-transfer-client licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.skinny-khaki-yak.sh
+        container: qc.lic_cranky-amethyst-rat
+  QC.Sec:
+    repos:
+      gitlab.cern.ch/batistal/eosc-data-transfer-client bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-wheat-barracuda.sh
+        container: qc.sec_sleepy-tomato-octopus
+  QC.Sty:
+    repos:
+      gitlab.cern.ch/batistal/eosc-data-transfer-client flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-violet-spider.sh
+        container: qc.sty_geeky-lilac-retriever
+  QC.Uni:
+    repos:
+      gitlab.cern.ch/batistal/eosc-data-transfer-client pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-lilac-argentino.sh
+        container: qc.uni_ready-apricot-uakari
+  QC.Ver:
+    repos:
+      gitlab.cern.ch/batistal/eosc-data-transfer-client get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-sepia-bison.sh
+        container: qc.ver_homey-champagne-zebu
+timeout: 5400
